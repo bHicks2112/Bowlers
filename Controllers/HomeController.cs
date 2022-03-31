@@ -38,9 +38,10 @@ namespace Bowlers.Controllers
         [HttpGet]
         public IActionResult EditBowler(int bowlerid)
         {
-            ViewBag.Bowlers = _repo.Bowlers.ToList();
+            ViewBag.Teams = _repo.Teams.ToList();
 
             var bowler = _repo.Bowlers.Single(x => x.BowlerID == bowlerid);
+
             return View("AddBowler", bowler);
         }
 
@@ -58,7 +59,7 @@ namespace Bowlers.Controllers
         public IActionResult DeleteBowler(int bowlerid)
         {
             var bowler = _repo.Bowlers.Single(x => x.BowlerID == bowlerid);
-            return View();
+            return View(bowler);
         }
 
         [HttpPost]
@@ -75,12 +76,25 @@ namespace Bowlers.Controllers
         public IActionResult AddBowler()
         {
             ViewBag.Bowlers = _repo.Bowlers.ToList();
+            ViewBag.Teams = _repo.Teams.ToList();
+
             return View();
         }
 
         [HttpPost]
         public IActionResult AddBowler(Bowler b)
         {
+            int max = 0;
+            foreach(var x in _repo.Bowlers)
+            {
+                if(max < x.BowlerID)
+                {
+                    max = x.BowlerID;
+                }
+            }
+
+            b.BowlerID = max + 1;
+
             _repo.CreateBowler(b);
 
             return RedirectToAction("Index");

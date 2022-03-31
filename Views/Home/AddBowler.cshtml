@@ -7,7 +7,7 @@
 
 <h2>Add Bowler:</h2>
 
-<form method="post" asp-action="AddBowler">
+<form method="post">
 
     <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -41,6 +41,19 @@
     <div class="form-group">
         <label asp-for="BowlerZip">Zip:</label>
         <input asp-for="BowlerZip" type="text" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BowlerPhoneNumber">Phone Number:</label>
+        <input asp-for="BowlerPhoneNumber" type="text" />
+    </div>
+    <div class="form-group">
+        <label asp-for="TeamID">Team:</label>
+        <select asp-for="TeamID" type="text">
+        @foreach(Team t in ViewBag.Teams)
+            {
+                <option value="@t.TeamID">@t.TeamName</option>
+            }
+        </select>
     </div>
 
 

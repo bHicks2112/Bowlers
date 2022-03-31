@@ -13,6 +13,8 @@ namespace Bowlers.Models
             _context = temp;
         }
         public IQueryable<Bowler> Bowlers => _context.Bowlers;
+        public IQueryable<Team> Teams => _context.Teams;
+
 
         public void SaveBowler(Bowler b)
         {
